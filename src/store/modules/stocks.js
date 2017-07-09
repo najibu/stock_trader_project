@@ -1,18 +1,23 @@
 import stocks from '../../data/stocks';
 
 const state = {
-  stock: []
+  stocks: []
 };
 
+// reducers
 const mutations = {
   'SET_STOCKS' (state, stocks) {
     state.stocks = stocks;
   },
   'RND_STOCKS' (state) {
-
+    state.stocks.forEach(stock => {
+      stock.price = Math.round(stock.price * ( 1 + Math.random() - .5));
+    });
   }
 };
 
+// commit the mutations (call reducers)
+// will be called as this.$store.dispatch("actionName");
 const actions = {
   buyStock: ({ commit }, order) => {
     commit('BUY_STOCK', order);
@@ -26,14 +31,7 @@ const actions = {
 };
 
 const getters = {
-  stocks: state => {
-    return state.stocks;
-  }
+  stocks: state => state.stocks
 };
 
-export default {
-  state,
-  mutations,
-  actions,
-  getters
-};
+export default { state, mutations, actions, getters };
