@@ -9,19 +9,20 @@
       </div>
       <div class="panel-body">
         <div class="pull-left">
-          <input 
-            type="number" 
+          <input
+            type="number"
             class="form-control"
             placeholder="Quantity"
             v-model="quantity"
           >
         </div>
         <div class="pull-right">
-          <button 
+          <button
             class="btn btn-success"
             @click="buyStock"
-            :disabled="quantity <= 0 || !Number.isInteger(quantity)"
+            :disabled="quantity < 1"
           >
+          <!-- :disabled="insufficientFunds || quantity <= 0 || !Number.isInteger(quantity)" -->
             Buy
           </button>
         </div>
@@ -45,7 +46,7 @@
           stockPrice: this.stock.price,
           quantity: this.quantity
         };
-        console.log(order);
+        this.$store.dispatch('buyStock', order);
         this.quantity = 0;
       }
     }

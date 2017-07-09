@@ -10,12 +10,12 @@ const mutations = {
   },
   'RND_STOCKS' (state) {
 
-  } 
+  }
 };
 
 const actions = {
   buyStock: ({ commit }, order) => {
-    commit();
+    commit('BUY_STOCK', order);
   },
   initStocks: ({ commit }) => {
     commit('SET_STOCKS', stocks);
